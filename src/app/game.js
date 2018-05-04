@@ -1,6 +1,7 @@
 import Snake from './Snake';
 import Item from './Item';
 import Paint from './Paint';
+import Sound from './Sound';
 
 class Game {
     constructor() {
@@ -22,6 +23,7 @@ class Game {
         this.snake.init();
 
         this.paint = new Paint(ctx, this.settings);
+        this.sound = new Sound();
     }
 
     play() {
@@ -86,6 +88,7 @@ class Game {
         }, this.settings.speed);
 
         document.addEventListener('point', () => {
+            this.sound.beep();
             document.getElementById('points').innerHTML = (this.snake.snake.length - 4).toString();
         }, false);
     }
