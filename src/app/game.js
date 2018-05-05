@@ -1,9 +1,17 @@
+// @flow
+
 import Snake from './Snake';
 import Item from './Item';
 import Paint from './Paint';
 
 class Game {
-    constructor() {
+    context: Object;
+    settings: Object;
+    snake: Snake;
+    paint: Paint;
+
+    constructor(context: Object) {
+        this.context = context;
         this.settings = {
             pixelSize: 15,
             areaSizeX: 795,
@@ -12,10 +20,15 @@ class Game {
         };
 
         const item = new Item(this.settings.areaSizeX, this.settings.areaSizeY, this.settings.pixelSize);
-        const c = document.getElementById("myCanvas");
-        c.width = this.settings.areaSizeX;
-        c.height = this.settings.areaSizeY;
-        const ctx = c.getContext("2d");
+        const canvas = this.context.getElementById("myCanvas");
+
+        if (!(canvas instanceof HTMLCanvasElement)) {
+            return;
+        }
+
+        canvas.width = this.settings.areaSizeX;
+        canvas.height = this.settings.areaSizeY;
+        const ctx = canvas.getContext("2d");
 
 
         this.snake = new Snake(this.settings, [], item);
@@ -24,11 +37,11 @@ class Game {
         this.paint = new Paint(ctx, this.settings);
     }
 
-    play() {
+    play(): void {
         let direction = 'right';
         let lastDirectionTime = null;
 
-        document.onkeydown = (event) => {
+        this.context.onkeydown = (event) => {
             const keyCode = event.keyCode;
 
             const d = new Date();
@@ -66,7 +79,7 @@ class Game {
             lastDirectionTime = date.getTime();
         };
 
-        let loop = setInterval(() => {
+        let loop: any  = setInterval(() => {
             this.paint.clearSnake(this.snake.body());
 
             try {
@@ -85,8 +98,13 @@ class Game {
 
         }, this.settings.speed);
 
-        document.addEventListener('point', () => {
-            document.getElementById('points').innerHTML = (this.snake.snake.length - 4).toString();
+        this.context.addEventListener('point', () => {
+            const elem = this.context.getElementById('points');
+            if (!(elem instanceof HTMLElement)) {
+                return;
+            }
+
+            elem.innerHTML = (this.snake.snake.length - 4).toString();
         }, false);
     }
 }
