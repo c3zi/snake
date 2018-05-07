@@ -1,15 +1,25 @@
+// @flow
+
 class Snake {
-    constructor(settings, defaultBody = [], item) {
+    pixelSize: number;
+    areaSizeX: number;
+    areaSizeY: number;
+    defaultBody: Array<Object>;
+    item: Object;
+    currentItem: Object;
+    snake: Array<Object>;
+
+    constructor(settings: Object, defaultBody: Array<Object> = [], item: Object) {
         this.pixelSize = settings.pixelSize || 15;
         this.areaSizeX = settings.areaSizeX || 795;
         this.areaSizeY = settings.areaSizeY || 600;
         this.defaultBody = defaultBody;
         this.item = item;
-        this.currentItem = null;
+        this.currentItem = {};
         this.snake = [];
     }
 
-    init() {
+    init(): void {
         if (this.defaultBody) {
             this.snake = this.defaultBody;
         }
@@ -17,14 +27,14 @@ class Snake {
         if (this.snake.length === 0) {
             this.snake = [
                 {x: 0, y: 0},
-                {x: 1 * this.pixelSize, y: 0},
+                {x: this.pixelSize, y: 0},
                 {x: 2 * this.pixelSize, y: 0},
                 {x: 3 * this.pixelSize, y: 0},
             ];
         }
     }
 
-    move(direction) {
+    move(direction: string): void {
         let head = this.snake[this.snake.length-1];
         let x = head.x;
         let y = head.y;
@@ -52,7 +62,7 @@ class Snake {
 
         if (this.currentItem.x === x && this.currentItem.y === y) {
             this.snake.unshift({x: this.snake[0].x - this.pixelSize, y: 0});
-            this.currentItem = null;
+            this.currentItem = {};
 
             const event = new Event('point');
             document.dispatchEvent(event);
@@ -65,7 +75,7 @@ class Snake {
         this.recalculateSnake(direction);
     }
 
-    recalculateSnake(direction) {
+    recalculateSnake(direction: string): void {
         const index = this.snake.length - 1;
         const head = this.snake[index];
 
@@ -86,7 +96,7 @@ class Snake {
         }
     }
 
-    isCollision(x, y) {
+    isCollision(x: number, y: number): boolean {
         for (const item of this.snake) {
             if (item.x === x && item.y === y) {
                 return true;
@@ -96,15 +106,15 @@ class Snake {
         return false;
     }
 
-    calculateItem () {
-        if (this.currentItem === null) {
+    calculateItem (): Object {
+        if (Object.keys(this.currentItem).length === 0) {
             this.currentItem = this.item.createItem(this.snake);
         }
 
         return this.currentItem;
     };
 
-    body() {
+    body(): any {
         return this.snake;
     }
 }

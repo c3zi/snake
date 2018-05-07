@@ -1,5 +1,12 @@
+// @flow
+
 class Item {
-    constructor(width, height, pixelSize) {
+    width: number;
+    height: number;
+    pixelSize: number;
+    type: string;
+
+    constructor(width: number, height: number, pixelSize: number) {
         if (width > 0) {
             width -= pixelSize;
         }
@@ -12,9 +19,10 @@ class Item {
         this.height = height;
         this.pixelSize = pixelSize;
         this.type = 'simple';
+
     }
 
-    createItem(snake) {
+    createItem(snake: Object[]): Object {
         let pointX = 0;
         let pointY = 0;
 
