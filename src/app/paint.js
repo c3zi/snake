@@ -41,7 +41,6 @@ class Paint {
         this.canvas.strokeStyle = '#FFC300';
         this.canvas.fillRect(x, y, this.settings.pixelSize, this.settings.pixelSize);
         this.canvas.strokeRect(x, y, this.settings.pixelSize, this.settings.pixelSize);
-
     }
 }
 
