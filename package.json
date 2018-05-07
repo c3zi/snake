@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --history-api-fallback --inline --progress",
-    "test": "node_modules/mocha/bin/mocha --require babel-core/register src/tests",
+    "test": "node_modules/mocha/bin/mocha --require babel-core/register src/app/tests",
     "build": "babel src/ -d lib/",
     "prepublish": "yarn run build"
   },

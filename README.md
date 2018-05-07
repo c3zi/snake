@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/c3zi/snake.svg?branch=master)](https://travis-ci.com/c3zi/snake)
 # snake
 Snake Game
 
