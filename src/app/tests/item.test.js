@@ -1,5 +1,5 @@
 const assert = require('assert');
-const Item = require('../app/item');
+const Item = require('./../item');
 
 describe('Item class', () => {
     describe('createItem()', () =>  {

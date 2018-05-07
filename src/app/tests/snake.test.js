@@ -1,6 +1,6 @@
 const assert = require('assert');
-const Snake = require('../app/snake');
-const Item = require('../app/Item');
+const Snake = require('./../snake');
+const Item = require('./../item');
 
 describe('Snake class', () => {
     const defaultSnake = [
