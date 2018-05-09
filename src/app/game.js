@@ -47,7 +47,7 @@ class Game {
             const d = new Date();
             const currentTime = d.getTime();
 
-            if (lastDirectionTime !== null && (currentTime-lastDirectionTime) > this.settings.speed) {
+            if (lastDirectionTime === null || (currentTime-lastDirectionTime) > this.settings.speed) {
                 switch (keyCode) {
                     case 37:
                         if (direction !== 'right') {
@@ -97,15 +97,6 @@ class Game {
             }
 
         }, this.settings.speed);
-
-        this.context.addEventListener('point', () => {
-            const elem = this.context.getElementById('points');
-            if (!(elem instanceof HTMLElement)) {
-                return;
-            }
-
-            elem.innerHTML = (this.snake.snake.length - 4).toString();
-        }, false);
     }
 }
 

@@ -5,18 +5,48 @@
     <title>Title</title>
 </head>
 <body>
-<span style="float: left">
-    <canvas id="myCanvas" style="background: #000; border: 5px solid green"></canvas>
-</span>
-<div style="float:right">
-    <div>
-        <button id="start" style="vertical-align: top; width: 50px;">Start</button>
-    </div>
-    <div>
-        <span>Points: </span>
-        <strong id="points">0</strong>
+<div class="container">
+    <div class="row">
+        <div class="col-9">
+            <div class="row">
+                <div id="userArea">
+                    <form id="userForm">
+                        <div class="form-group">
+                            <label for="nickname">Nickname</label>
+                            <input type="text" class="form-control" id="nickname" aria-describedby="nicknameHelp" placeholder="Enter nickname">
+                            <small id="nicknameHelp" class="form-text text-muted">Nickname is required to play in snake!</small>
+                        </div>
+                        <button class="btn btn-primary">Play</button>
+                    </form>
+                </div>
+            </div>
+            <div id="gameArea" class="row d-none">
+                <canvas id="myCanvas" style="background: #000; border: 5px solid green" />
+            </div>
+        </div>
+        <div class="col-3">
+            <div id="pointsArea" class="row d-none">
+                <span>Points: </span>
+                <strong id="points">0</strong>
+                <br />
+                <br />
+                <br />
+            </div>
+            <div class="row">
+                <h3>Scores</h3>
+                <table class="table">
+                    <tr>
+                        <th>Nickname</th>
+                        <th>Score</th>
+                    </tr>
+                    <tr>
+                        <td>cezi</td>
+                        <td>35</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
-
 </body>
 </html>
