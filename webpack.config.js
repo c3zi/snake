@@ -1,4 +1,6 @@
+require('dotenv').config();
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Require  html-webpack-plugin plugin
+const webpack = require('webpack');
 
 module.exports = {
     mode: 'development',
@@ -27,6 +29,9 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: __dirname + "/src/public/index.html",
             inject: 'body'
+        }),
+        new webpack.DefinePlugin({  // plugin to define global constants
+            API_URL: JSON.stringify(process.env.API_URL)
         })
     ],
     devServer: {  // configuration for webpack-dev-server

@@ -8,6 +8,7 @@ class Snake {
     item: Object;
     currentItem: Object;
     snake: Array<Object>;
+    defaultLength: number;
 
     constructor(settings: Object, defaultBody: Array<Object> = [], item: Object) {
         this.pixelSize = settings.pixelSize || 15;
@@ -32,6 +33,8 @@ class Snake {
                 {x: 3 * this.pixelSize, y: 0},
             ];
         }
+
+        this.defaultLength = this.snake.length;
     }
 
     move(direction: string): void {
@@ -61,11 +64,18 @@ class Snake {
         this.calculateItem();
 
         if (this.currentItem.x === x && this.currentItem.y === y) {
-            this.snake.unshift({x: this.snake[0].x - this.pixelSize, y: 0});
-            this.currentItem = {};
+            const detail = {
+                score: this.snake.length - this.defaultLength + 1,
+                snake: this.snake,
+                item: { x: this.currentItem.x, y: this.currentItem.y },
+            };
 
-            const event = new CustomEvent('point', { detail: this.snake.length });
+            this.snake.unshift({x: this.snake[0].x - this.pixelSize, y: 0});
+
+            const event = new CustomEvent('point', { detail });
             document.dispatchEvent(event);
+
+            this.currentItem = {};
         }
 
 
