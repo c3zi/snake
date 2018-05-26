@@ -91,7 +91,6 @@ function generateToken(nickname) {
 }
 
 function addPoint(token, snake, item) {
-    console.log(snake, item);
     fetch(API_URL + `/scores/${token}`,
         {
             method: 'PUT',

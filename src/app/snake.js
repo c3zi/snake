@@ -70,9 +70,9 @@ class Snake {
                 item: { x: this.currentItem.x, y: this.currentItem.y },
             };
 
-            this.snake.unshift({x: this.snake[0].x - this.pixelSize, y: 0});
-
             const event = new CustomEvent('point', { detail });
+
+            this.snake.push({x, y});
             document.dispatchEvent(event);
 
             this.currentItem = {};
